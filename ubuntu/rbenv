@@ -2,6 +2,8 @@
 # install rbenv on ubuntu - to home dir
 source ../lib/helpers.sh
 
+require_command git
+
 if [ ! -d $HOME/.rbenv ]; then
   yak "cloning rbenv to $HOME/.rbenv  "
   git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv

@@ -38,3 +38,10 @@ function got_command() {
     return 0
   fi
 }
+
+function require_command() {
+  which $1 > /dev/null 2>&1
+  if [ $? -eq 1 ]; then
+    boom "required command not found: $1"
+  fi
+}
