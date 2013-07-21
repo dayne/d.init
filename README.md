@@ -9,7 +9,9 @@ This is intended to be a moshpit made for myself..
 
 sillyness is used like this
 
-   ./ubuntu
-   ./rbenv
-   ./ruby
-   ./tat
+{{Shell
+./ubuntu
+./rbenv
+./ruby
+./tat
+}}
