@@ -1,6 +1,6 @@
 #!/bin/bash
 # install rbenv on ubuntu - to home dir
-source ../lib/helpers.sh
+source lib/helpers.sh
 
 require_command git
 
