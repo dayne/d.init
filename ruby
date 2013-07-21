@@ -1,5 +1,5 @@
 #!/bin/bash -l
-source ../lib/helpers.sh
+source lib/helpers.sh
 
 RUBY_VER="2.0.0-p247"
 
