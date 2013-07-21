@@ -5,4 +5,4 @@ to reduce my random computer setup time
 
 This is intended to be a moshpit made for myself.. 
 
-![.dwi.gif](https://raw.github.com/dayne/d.init/master/.dwi.gif)
+![dwi.gif](http://media2.giphy.com/media/TidtDukYTD0lO/original.gif)
