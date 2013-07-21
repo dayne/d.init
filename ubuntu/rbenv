@@ -1,0 +1,38 @@
+#!/bin/bash
+# install rbenv on ubuntu - to home dir
+source ../lib/helpers.sh
+
+if [ ! -d $HOME/.rbenv ]; then
+  yak "cloning rbenv to $HOME/.rbenv  "
+  git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
+else
+  yak "appears .rbenv already cloned to $HOME/.rbenv .. skipping clone"
+fi
+
+grep DBB-RBENV-SETUP $HOME/.bash_profile > /dev/null
+if [ $? -eq 1 ]; then
+  yak "adding rbenv to the .bash_profile"
+  echo '
+# DBB-RBENV-SETUP
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+eval "$(rbenv init -)"
+' >> ~/.bash_profile
+
+else
+  yak "appears rbenv already setup in .bash_profile ... skipping setup"
+fi
+
+if [ ! -d $HOME/.rbenv/plugins ]; then
+  yak "making a $HOME/.rbenv/plugins for ruby-build"
+  mkdir $HOME/.rbenv/plugins
+fi
+
+if [ ! -d $HOME/.rbenv/plugins/ruby-build ]; then
+  yak "cloning ruby-build into rbenv plugins dir"
+  git clone git://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+else
+  yak "ruby-build already available to rbenv ... skipping clone"
+fi
+
+yak '     >>> to make rbenv available you need to do the following <<< '
+echo ' exec $SHELL -l'
