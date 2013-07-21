@@ -45,3 +45,17 @@ function require_command() {
     boom "required command not found: $1"
   fi
 }
+
+function agree() {
+  while( true ); do
+    echo -n "$1 : (y/n) : "
+    read answer
+    if [ $answer == "n" ]; then
+      return 1; 
+    elif [ $answer == 'y' ]; then
+      return 0;
+    fi
+    echo "invalid answer - provide a 'y' or a 'n'"
+    sleep 0.5
+  done
+}
