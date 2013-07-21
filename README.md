@@ -9,9 +9,9 @@ This is intended to be a moshpit made for myself..
 
 sillyness is used like this
 
-{{Shell
+```shell
 ./ubuntu
 ./rbenv
 ./ruby
 ./tat
-}}
+```
