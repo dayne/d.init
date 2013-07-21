@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# http://www.vips.ecs.soton.ac.uk/index.php?title=Build_on_Ubuntu
+
+source ../lib/helpers.sh
+
+agree "want development libs?"
+if [ $? -eq 0 ]; then
+  yak "ok, installing development libraries"
+  # source install
+  ubuntu_install "build-essential  libxml2-dev libfftw3-dev gettext"
+  ubuntu_install "libgtk2.0-dev python-dev liblcms1-dev liboil-dev"
+  ubuntu_install "libmagickwand-dev libopenexr-dev libcfitsio3-dev"
+  ubuntu_install "gobject-introspection flex bison libtiff5"
+fi
+
+agree "install pre compiled nips and libvips?"
+if [ $? -eq 0 ]; then
+  # basic install
+  ubuntu_install 'nip2 libvips'
+fi
