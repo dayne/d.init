@@ -16,9 +16,16 @@ if [ $? -eq 1 ]; then
   echo '
 # tux attach helper: tat
 source $HOME/.tat/tat.sh
-export CODE_ROOT_DIRS="$HOME:projects:$HOME/gits"'
+export CODE_ROOT_DIRS="$HOME:projects:$HOME/gits"' >> $HOME/.bash_profile
 
 else
-   yak "appears tat already setup in .bash_profile ... skipping setup"
+  yak "appears tat already setup in .bash_profile ... skipping setup"
 fi
 
+if [ ! -f $HOME/.tmux ]; then
+  yak "creating you a good default $HOME/.tmux file"
+  echo "set-option -g prefix C-A
+setw -g aggressive-resize on
+set -g base-index 1
+bind-key a send-prefix" > $HOME/.tmux
+fi

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source ../lib/helpers.sh
+
+require_command 'brew'
+require_command 'pip-2.7'
+
+run "pip-2.7 install numpy"
+
+run "brew remove pyqt"
+run "brew install pyqt"
+
+
+grep DBB-BREW-PYTHONPATH $HOME/.bash_profile > /dev/null
+if [ $? -eq 1 ]; then
+  yak "adding PYTHONPATH to the .bash_profile"
+  echo '
+# DBB-BREW-PYTHONPATH for qgis python2.7 fun
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+' >> ~/.bash_profile
+else
+  yak "PYTHONPATH already setup ... skipping"
+fi
+
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+run "brew tap homebrew/science"
+run "brew install grass"
+run "brew install postgis"
+run "brew install qgis --with-grass --with-postgis"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source lib/helpers.sh
+
+require_command git
+
+if [ ! -d ~/.dotfiles ]; then
+  yak "cloning github:dayne/dotfiles to $HOME/.dotfiles"
+  git clone git@github.com:dayne/dotfiles.git $HOME/.dotfiles
+else
+  yak "the $HOME/.dotfiles already exists ... skipping checkout"
+fi
