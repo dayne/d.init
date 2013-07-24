@@ -4,6 +4,12 @@
 
 source ../lib/helpers.sh
 
+agree "install pre compiled nips and libvips?"
+if [ $? -eq 0 ]; then
+  # basic install
+  ubuntu_install 'nip2 libvips'
+fi
+
 agree "want development libs?"
 if [ $? -eq 0 ]; then
   yak "ok, installing development libraries"
@@ -11,11 +17,10 @@ if [ $? -eq 0 ]; then
   ubuntu_install "build-essential  libxml2-dev libfftw3-dev gettext"
   ubuntu_install "libgtk2.0-dev python-dev liblcms1-dev liboil-dev"
   ubuntu_install "libmagickwand-dev libopenexr-dev libcfitsio3-dev"
-  ubuntu_install "gobject-introspection flex bison libtiff5"
-fi
+  ubuntu_install "gobject-introspection flex bison libtiff5 libvips-dev"
 
-agree "install pre compiled nips and libvips?"
-if [ $? -eq 0 ]; then
-  # basic install
-  ubuntu_install 'nip2 libvips'
+  agree "want to gem install ruby-vips too?"
+  if [ $? -eq 0 ]; then
+      gem install ruby-vips
+  fi
 fi

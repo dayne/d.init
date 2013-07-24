@@ -18,8 +18,7 @@ if [ $? -eq 1 ]; then
 # DBB-RBENV-SETUP
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init -)"
-' >> ~/.bash_profile
-
+' >> $HOME/.bash_profile
 else
   yak "appears rbenv already setup in .bash_profile ... skipping setup"
 fi
