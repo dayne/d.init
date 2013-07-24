@@ -1,0 +1,32 @@
+#!/bin/bash
+
+source lib/helpers.sh
+
+if [ ! -d $HOME/bin ]; then
+  run "mkdir $HOME/bin"
+fi
+
+grep HOME_BIN_DIR $HOME/.bash_profile > /dev/null 
+if [ $? -eq 1 ]; then
+yak "setting up $HOME/bin in your PATH in .bash_profile"
+  echo '
+# HOME_BIN_DIR
+export PATH=$HOME/bin:$PATH
+eval "$(hub alias -s)"
+' >> $HOME/.bash_profile
+  PROFILE_UPDATE=1
+else
+  yak "HOME_BIN_DIR already setup ... skipping" 
+  PROFILE_UPDATE=0
+fi
+
+require_command 'curl'
+if [ ! -f $HOME/bin/hub ]; then
+yak "setting up hub in $HOME/bin/hub"
+run "curl http://hub.github.com/standalone -sLo ~/bin/hub && chmod +x ~/bin/hub"
+fi
+
+if [ $PROFILE_UPDATE -eq 1 ]; then
+  yak "updated your $HOME/.bash_profile - you'll need to do this:"
+  echo '    exec $SHELL -l '
+fi
