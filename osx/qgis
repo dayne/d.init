@@ -2,10 +2,13 @@
 
 source ../lib/helpers.sh
 
-require_command 'brew'
-require_command 'pip-2.7'
 
-run "pip-2.7 install numpy"
+boom "this is not a valid script yet... do not run if you aren't dayne in debug brain"
+
+require_command 'brew'
+require_command 'pip'
+
+run "sudo pip install numpy"
 
 run "brew remove pyqt"
 run "brew install pyqt"
@@ -21,6 +24,9 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 else
   yak "PYTHONPATH already setup ... skipping"
 fi
+
+# not sure if this is good idea
+#run "brew unlink python"
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 run "brew tap homebrew/science"
