@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require '../lib/helpers.rb'
+require 'colored'
+
+$TEST = ARGV.delete("--test")
+
+boom "I only support Ubuntu currently" unless ubuntu?
+
+if not got_command?('virtualbox')
+  install "virtualbox"
+end
+
+if not got_command?('vagrant')
+  install "vagrant"
+end
+
+install "linux-headers-$(uname -r)" if ubuntu? and not $TEST
+
+run "sudo dpkg-reconfigure virtualbox-dkms" if ubuntu? and not $TEST
+
+yak "you are good to go -- try it out with: "
+puts "vagrant box add precise32 http://files.vagrantup.com/precise32.box".green
