@@ -3,6 +3,8 @@
 require '../lib/helpers.rb'
 require 'colored'
 
+boom "this doesn't work because apt installed vagrant wants apt ruby .. bleh"
+
 $TEST = ARGV.delete("--test")
 
 boom "I only support Ubuntu currently" unless ubuntu?
