@@ -8,7 +8,6 @@ function boom() {
   exit 1
 }
 
-
 function yak() {
   echo "###########################################################################"
   echo ${1} 
@@ -29,7 +28,7 @@ function ubuntu_install() {
 }
 
 function got_command() {
-  which $1 2> /dev/null
+  which $1 &> /dev/null
   if [ $? -eq 1 ]; then
     echo "#>> missing command : $1"
     return 1
@@ -65,4 +64,45 @@ function run() {
   echo "# >>>>> # $1 "
   sleep 0.4
   $1
+}
+
+
+function run_install_unless() {
+  got_command $2
+  if [[ $? -eq 0 ]]; then
+    echo "#   skipping install: $1"
+    return 1
+  else
+    run "$1"
+  fi
+}
+
+function ensure_mkdir() {
+  if [[ ! -d ${1} ]]; then
+    echo "# >> Creating dir: ${1}"
+    mkdir -p $1
+    if [[ ! $? -eq 0 ]]; then
+      boom "ensure_mkdir failed for creating: ${1}"
+    fi
+  else
+    echo "# >> exists .. skipping creation: ${1}"
+  fi
+}
+
+function cp_file {
+  if [[ ! -f $2 ]]; then
+    cp -v $1 $2
+    
+    if [[ -d $2 ]]; then
+      target=$2/`basename $1`
+    else
+      target=$2
+    fi
+
+    if [[ ! -f $target ]]; then
+      boom "copy of $target failed"
+    fi
+  else
+    echo "# >> exists .. skipping copy ${2}"
+  fi
 }
