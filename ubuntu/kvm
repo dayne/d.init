@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source ../lib/helpers.sh
+
+ubuntu_install "qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils"
