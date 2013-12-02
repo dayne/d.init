@@ -11,6 +11,11 @@ else
   yak "appears .rbenv already cloned to $HOME/.rbenv .. skipping clone"
 fi
 
+if [[ ! -f $HOME/.bash_profile ]]; then
+  yak "didn't find a .bash_profile .. just gonna do touch"
+  touch $HOME/.bash_profile 
+fi
+
 grep DBB-RBENV-SETUP $HOME/.bash_profile > /dev/null
 if [ $? -eq 1 ]; then
   yak "adding rbenv to the .bash_profile"
