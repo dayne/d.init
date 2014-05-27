@@ -2,6 +2,8 @@
 
 source lib/helpers.sh
 
+boom "brew install hub on osx"
+
 if [ ! -d $HOME/bin ]; then
   run "mkdir $HOME/bin"
 fi

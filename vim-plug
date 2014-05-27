@@ -1,0 +1,35 @@
+#!/bin/bash -l
+source lib/helpers.sh
+
+got_command "vim"
+if [ $? -eq 1 ]; then
+  boom "vim not found..  Adding plugins won't be of much use to you"
+fi
+
+if [[ ! -d ~/.vim/autoload ]]; then
+  yak "making .vim/autoload dir"
+  mkdir -p ~/.vim/autoload
+fi
+
+if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
+  yak "grabbing plug.vim for autoload"
+  curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+else
+  yak "already downloaded vim-plug"
+fi
+
+grep "plug#begin('~/.vim/plugged')" ~/.vimrc > /dev/null
+if [ $? -eq 1 ]; then
+  yak "adding vim-plug to .vimrc"
+  echo "
+
+# vim-plug - a vim plugin manager : https://github.com/junegunn/vim-plug
+# :PlugInstall to install plugins
+call plug#begin('~/.vim/plugged')
+
+
+call plug#end()
+  " >> ~/.vimrc
+else
+  yak "vim-plug already setup in .vimrc"
+fi
