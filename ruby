@@ -1,7 +1,7 @@
 #!/bin/bash -l
 source lib/helpers.sh
 
-RUBY_VER="2.0.0-p247"
+RUBY_VER="2.1.2"
 
 got_command 'rvm'
 if [ $? -eq 0 ]; then
@@ -17,19 +17,25 @@ if [ $? -eq 0 ]; then
   existing_version=${r_version/p/-p}
   if [ $existing_version == "$RUBY_VER" ]; then 
     yak "you have the version of ruby in your path I would install ... skipping install"
+    SKIP_RUBY=1
   else
     echo "your existing ruby $existing_version not my target version $RUBY_VER"
-
-    got_command 'rbenv'
-    if [ $? -eq 0 ]; then
-      yak "installing ruby-$RUBY_VER"
-      rbenv install $RUBY_VER
-      rbenv rehash
-      rbenv global $RUBY_VER
-    else
-      boom "rbenv not found .. failed to install ruby $RUBY_VER"
-    fi
   fi
+fi
+
+got_command 'rbenv'
+if [ $? -eq 0 ]; then
+  yak "got rbenv"
+  if [ $SKIP_RUBY -eq 1 ]; then
+    yak "Skipping ruby install"
+  else
+    yak "installing ruby-$RUBY_VER"
+    rbenv install $RUBY_VER
+    rbenv rehash
+    rbenv global $RUBY_VER
+  fi
+else
+  boom "rbenv not found .. failed to install ruby $RUBY_VER"
 fi
 
 got_command 'bundle'
