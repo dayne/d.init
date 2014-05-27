@@ -23,8 +23,8 @@ if [ $? -eq 1 ]; then
   yak "adding vim-plug to .vimrc"
   echo "
 
-# vim-plug - a vim plugin manager : https://github.com/junegunn/vim-plug
-# :PlugInstall to install plugins
+\" vim-plug - a vim plugin manager : https://github.com/junegunn/vim-plug
+\" :PlugInstall to install plugins
 call plug#begin('~/.vim/plugged')
 
 
@@ -33,3 +33,5 @@ call plug#end()
 else
   yak "vim-plug already setup in .vimrc"
 fi
+
+grep "Now you have to launch :PluginInstall vim"
